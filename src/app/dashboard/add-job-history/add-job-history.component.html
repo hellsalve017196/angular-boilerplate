@@ -1,0 +1,62 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Add Job History
+      <small>Control panel</small>
+    </h1>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <div class="alert alert-success" role="alert" *ngIf="AfterSuccess">
+      Successfully Submitted
+    </div>
+
+    <div class="alert alert-danger" role="alert" *ngIf="AfterFailer">
+      Failed to Submit
+    </div>
+
+    <form #addjobhistory="ngForm" (submit)="addjobhistory.form.valid && addJobHistory(addjobhistory)">
+      <div class="row">
+        <div class="col-sm-12">
+
+          <div class="form-group">
+            <label for="position">Position</label>
+            <input type="text" class="form-control" id="position" [(ngModel)]="position" #set_position="ngModel" name="position" placeholder="Enter Position" required>
+
+            <small *ngIf="set_position.invalid && (set_position.touched || set_position.dirty)" class="form-text text-muted" style="color: red">Position is Required</small>
+          </div>
+
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" class="form-control" id="company" [(ngModel)]="company" name="company" #set_company="ngModel" placeholder="Enter company" required>
+            <small *ngIf="set_company.invalid && (set_company.touched || set_company.dirty)" class="form-text text-muted" style="color: red">Company is Required</small>
+          </div>
+
+          <div class="form-group">
+            <label for="time">Time</label>
+            <input type="text" class="form-control" id="time" name="time" #set_time="ngModel" [(ngModel)]="time" placeholder="Enter Period" required>
+            <small *ngIf="set_time.invalid && (set_time.touched || set_time.dirty)" class="form-text text-muted" style="color: red">Period is Required</small>
+          </div>
+
+          <div class="form-group">
+            <label for="task">Task (comma separated)</label>
+            <textarea type="text" class="form-control" id="task" name="task" #set_task="ngModel" [(ngModel)]="task" placeholder="Task" required>
+          </textarea>
+            <small *ngIf="set_task.invalid && (set_task.dirty || set_task.touched)" class="form-text text-muted" style="color: red">Task is Required</small>
+          </div>
+
+          <input class="btn btn-lg btn-primary" type="submit" value="Go" [disabled]="!addjobhistory.valid"/>
+
+
+        </div>
+      </div>
+    </form>
+
+
+
+  </section>
+  <!-- /.content -->
+</div>

@@ -1,0 +1,85 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Update Job History
+      <small>Control panel</small>
+    </h1>
+  </section>
+
+  <!-- Main content -->
+  <section class="content" *ngIf="jobhistory?.length > 0">
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <td>Company</td>
+              <td>Position</td>
+              <td>Time</td>
+              <td>Update</td>
+              <td>Delete</td>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let job of jobhistory">
+              <td>{{ job.company }}</td>
+              <td>{{ job.position }}</td>
+              <td>{{ job.time }}</td>
+              <td><button class="btn btn-sm btn-primary" (click)="openUpdateModal(job,modal)">Update</button></td>
+              <td><button class="btn btn-sm btn-warning" (click)="onDeleteJob(job.key)">Delete</button></td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+
+
+    <app-modal #modal>
+      <div class="app-modal-header">
+        Update Job History
+      </div>
+      <div class="app-modal-body">
+        <div class="form-group">
+          <label for="position">Position</label>
+          <input type="text" class="form-control" id="position" [(ngModel)]="position" [name]="position" [value]="updatejobhistory.position" placeholder="Enter Position" required>
+
+          <!--<small *ngIf="set_position.invalid && (set_position.touched || set_position.dirty)" class="form-text text-muted" style="color: red">Position is Required</small>-->
+        </div>
+
+        <div class="form-group">
+          <label for="position">Position</label>
+          <input type="text" class="form-control" id="company" [(ngModel)]="company" name="company" [value]="updatejobhistory.company" placeholder="Enter Company" required>
+
+          <!--<small *ngIf="set_position.invalid && (set_position.touched || set_position.dirty)" class="form-text text-muted" style="color: red">Position is Required</small>-->
+        </div>
+
+        <div class="form-group">
+          <label for="position">Period</label>
+          <input type="text" class="form-control" id="time" [(ngModel)]="time" name="time" [value]="updatejobhistory.time" placeholder="Enter Period" required>
+
+          <!--<small *ngIf="set_position.invalid && (set_position.touched || set_position.dirty)" class="form-text text-muted" style="color: red">Position is Required</small>-->
+        </div>
+
+        <div class="form-group" *ngIf="(previous_info | json) != ({} | json)">
+          <label for="position">Task</label>
+          <textarea
+            type="text" class="form-control" id="task" [(ngModel)]="task" name="task" [value]="updatejobhistory.task ? updatejobhistory.task.join(','):'empty'" placeholder="Enter Task" required
+          ></textarea>
+          <!--<small *ngIf="set_position.invalid && (set_position.touched || set_position.dirty)" class="form-text text-muted" style="color: red">Position is Required</small>-->
+        </div>
+
+
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-default" (click)="modal.hide()">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </app-modal>
+
+  </section>
+  <!-- /.content -->
+</div>
